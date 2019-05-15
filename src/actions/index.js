@@ -1,27 +1,25 @@
-import axios from 'axios';
+import axios from "axios";
 
 export const FETCH_CHAR_START = "FETCH_CHAR_START";
 export const FETCH_CHAR_SUCCESS = "FETCH_CHAR_SUCCESS";
 export const FETCH_CHAR_FAILURE = "FETCH_CHAR_FAILURE";
 
 export const getCharacter = () => dispatch => {
-    axios
-    .get('https://swapi.co/api/people/')
+  dispatch({ type: FETCH_CHAR_START });
+  axios
+    .get("https://swapi.co/api/people/")
     .then(res => {
-        dispatch({ type: FETCH_CHAR_SUCCESS, payload: res.data });
+        console.log("from actions:", res.data)
+      dispatch({ type: FETCH_CHAR_SUCCESS, payload: res.data.results });
     })
     .catch(err => {
-        console.log(err.response);
-        dispatch({
-            type: FETCH_CHAR_FAILURE,
-            payload: `${err.response.status} ${err.response.statusText}`
-        });
+      console.log(err.response);
+      dispatch({
+        type: FETCH_CHAR_FAILURE,
+        payload: `${err.response.status} ${err.response.statusText}`
+      });
     });
 };
-
-
-
-
 
 // we'll need axios
 

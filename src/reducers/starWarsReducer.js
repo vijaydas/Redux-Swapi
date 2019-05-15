@@ -9,12 +9,12 @@ import {
 const initialState = {
   characters: [],
   isLoading: false,
-  error: ""
+  error: null
   // Array characters, Boolean fetching, null error.
 };
 
 export const charsReducer = (state = initialState, action) => {
-  console.log("charsReducer", action);
+  //console.log("charsReducer", action);
   switch (action.type) {
     // Fill me in with the important reducers
     // action types should be FETCHING, SUCCESS and FAILURE
@@ -24,15 +24,15 @@ export const charsReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
-        error: ""
+        //error: ""
       };
     case FETCH_CHAR_SUCCESS:
       return {
         ...state,
-        isLoading: false,
-        error: "",
-        characters: [action.payload]
-      };
+        characters: [...state.characters, ...action.payload],
+        isLoading: false
+        //error: "",
+              };
     case FETCH_CHAR_FAILURE:
       return {
         ...state,
