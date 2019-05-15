@@ -1,3 +1,28 @@
+import axios from 'axios';
+
+export const FETCH_CHAR_START = "FETCH_CHAR_START";
+export const FETCH_CHAR_SUCCESS = "FETCH_CHAR_SUCCESS";
+export const FETCH_CHAR_FAILURE = "FETCH_CHAR_FAILURE";
+
+export const getCharacter = () => dispatch => {
+    axios
+    .get('https://swapi.co/api/people/')
+    .then(res => {
+        dispatch({ type: FETCH_CHAR_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+        console.log(err.response);
+        dispatch({
+            type: FETCH_CHAR_FAILURE,
+            payload: `${err.response.status} ${err.response.statusText}`
+        });
+    });
+};
+
+
+
+
+
 // we'll need axios
 
 // we'll need to create 3 different action types here.
